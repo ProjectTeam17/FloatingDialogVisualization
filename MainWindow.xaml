@@ -1,0 +1,750 @@
+﻿<Window x:Class="FloatingDialogVisualisation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FloatingDialogVisualisation.viewmodel"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:iex="clr-namespace:Microsoft.Expression.Interactivity.Input;assembly=Microsoft.Expression.Interactions"
+        mc:Ignorable="d"
+        Title="Floating Dialog Visualization" Height="650" Width="900" Icon="img/pin.png" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ResizeMode="NoResize">
+
+
+    <Window.DataContext>
+        <local:VwModal/>
+    </Window.DataContext>
+
+    <Window.Background>
+        <ImageBrush ImageSource="/img/current_background.jpg"></ImageBrush>
+    </Window.Background>
+
+    <Canvas>
+
+        <StackPanel Orientation="Vertical" Canvas.Left="86" Canvas.Top="145">
+            <Image Source="img/vaccumpump.png" Name="img1" Canvas.Left="86" Canvas.Top="114" Height="120" Width="129">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseEnter">
+                        <i:InvokeCommandAction Command="{Binding VaccumPopOpen}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+            <Popup Name="vaccumMenu" Placement="Right">
+                <Menu>
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+                    <MenuItem Name="closeVaccumMenu" HorizontalAlignment="Right">
+                        <MenuItem.Icon>
+                            <Image Source="/img/close.png" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding VaccumPopClose}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="vaccumMenuNameHeader">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="vaccumNamePin" Visibility="Hidden">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding VaccumNameClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="vaccumMenuPower">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="vaccumPowerPin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding VaccumPowerClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="vaccumMenuPowerTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding VaccumChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="vaccumMenuPressure">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="vaccumPressurePin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding VaccumPressureClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="vaccumMenuPressureTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding VaccumChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="vaccumMenuSpeed">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="vaccumSpeedPin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding VaccumSpeedClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="vaccumMenuSpeedTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding VaccumChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="vaccumMenuTemperature">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="vaccumTemperaturePin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding VaccumTemperatureClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="vaccumMenuTemperatureTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding VaccumChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                </Menu>
+            </Popup>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Canvas.Left="86" Canvas.Top="265">
+            <StackPanel Canvas.Left="215" Canvas.Top="114" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Name="vaccumMenuName_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding VaccumMenuLabelImgName_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="vaccumMenuName_prop" Content="Name : Vacuum Pump"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="vaccumMenuPower_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding VaccumMenuLabelImgPower_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="vaccumMenuPower_prop"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="vaccumMenuTemperature_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding VaccumMenuLabelImgTemperature_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="vaccumMenuTemperature_prop"></Label>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="vaccumMenuPressure_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding VaccumMenuLabelImgPressure_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="vaccumMenuPressure_prop"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="vaccumMenuSpeed_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding VaccumMenuLabelImgSpeed_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="vaccumMenuSpeed_prop"></Label>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Canvas.Left="470" Canvas.Top="145">
+            <Image Source="/img/generator_1.png" Name="img" Canvas.Left="485" Canvas.Top="109" Height="125" Width="163">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseEnter">
+                        <i:InvokeCommandAction Command="{Binding GeneratorPopOpen}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+            <Popup Name="generatorMenu" Placement="Right">
+                <Menu>
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+                    <MenuItem Name="closeGeneratorMenu" HorizontalAlignment="Right">
+                        <MenuItem.Icon>
+                            <Image Source="/img/close.png" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding GeneratorPopClose}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="generatorName">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="20" Name="generatorNamePin" Visibility="Hidden">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding GeneratorNameClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="generatorPower">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="20" Name="generatorPowerPin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding GeneratorPowerClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="generatorMenuPowerTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding GeneratorChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="generatorPressure">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="20" Name="generatorPressurePin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding GeneratorPressureClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="generatorMenuPressureTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding GeneratorChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="generatorSpeed">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="20" Name="generatorSpeedPin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding GeneratorSpeedClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="generatorMenuSpeedTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding GeneratorChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="generatorTemperature">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="generatorTemperaturPin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding GeneratorTemperatureClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="generatorMenuTemperatureTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding GeneratorChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                </Menu>
+            </Popup>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Canvas.Left="470" Canvas.Top="275">
+            <StackPanel  Canvas.Left="653" Canvas.Top="114" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Name="generatorName_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding GeneratorLabelImgName_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="generatorName_prop" Content="Name : Generator"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="generatorPower_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding GeneratorLabelImgPower_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="generatorPower_prop"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="generatorTemperature_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding GeneratorLabelImgtemperature_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="generatorTemperature_prop"></Label>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="generatorPressure_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding GeneratorLabelImgPressure_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="generatorPressure_prop"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="generatorSpeed_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding GeneratorLabelImgSpeed_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="generatorSpeed_prop"></Label>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Canvas.Left="86" Canvas.Top="355">
+            <Image Height="132" Canvas.Left="86" Canvas.Top="252" Source="/img/turbine_use.png" Width="129">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseEnter">
+                        <i:InvokeCommandAction Command="{Binding TurbinePopOpen}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+            <Popup Name="turbineMenu" Placement="Right">
+                <Menu>
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+                    <MenuItem Name="closeturbineMenu" HorizontalAlignment="Right">
+                        <MenuItem.Icon>
+                            <Image Source="/img/close.png" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding TurbinePopClose}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="turbineMenuName">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="turbineNamePin" Visibility="Hidden">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding TurbineMenuNameClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="turbineMenuPower">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="turbinePowerPin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding TurbineMenuPowerClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="turbineMenuPowerTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding TurbineChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="turbineMenuPressure">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="turbinePressurePin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding TurbineMenuPressureClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="turbineMenuPressureTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding TurbineChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="turbineMenuSpeed">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="turbineSpeedPin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding TurbineMenuSpeedClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="turbineMenuSpeedTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding TurbineChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="turbineMenuTemperature">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="turbineTemperaturePin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding TurbineMenuTemperatureClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="turbineMenuTemperatureTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding TurbineChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                </Menu>
+            </Popup>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Canvas.Left="86" Canvas.Top="492">
+            <StackPanel  Canvas.Left="215" Canvas.Top="252" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Name="turbineMenuName_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding TurbineMenuLabelImgName_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="turbineMenuName_prop" Content="Name : Turbine"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="turbineMenuPower_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding TurbineMenuLabelImgPower_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="turbineMenuPower_prop"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="turbineMenuTemperature_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding TurbineMenuLabelImgTemperature_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="turbineMenuTemperature_prop"></Label>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="turbineMenuPressure_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding TurbineMenuLabelImgPressure_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="turbineMenuPressure_prop"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="turbineMenuSpeed_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding TurbineMenuLabelImgSpeed_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="turbineMenuSpeed_prop"></Label>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Canvas.Left="470" Canvas.Top="355">
+            <Image Height="132" Canvas.Left="475" Canvas.Top="241" Width="163" Source="/img/condensor_new.png">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseEnter">
+                        <i:InvokeCommandAction Command="{Binding CondensorPopOpen}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+            <Popup Name="condensorMenu" Placement="Right">
+                <Menu>
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+                    <MenuItem Name="condensorMenuclose" HorizontalAlignment="Right">
+                        <MenuItem.Icon>
+                            <Image Source="/img/close.png">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding CondensorPopClose}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="condensorMenuitemName">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="condensorNamePin" Visibility="Hidden">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding CondensorMenuNameClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="condensorMenuPower">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="condensorPowerPin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding CondensorMenuPowerClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="condensorMenuPowerTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding CondensorChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="condensorMenuPressure">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="condensorPressurePin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding CondensorMenuPressureClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="condensorMenuPressureTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding CondensorChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="condensorMenuSpeed">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="condensorSpeedPin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding CondensorMenuSpeedClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="condensorMenuSpeedTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding CondensorChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                    <MenuItem Name="condensorMenuTemperature">
+                        <MenuItem.Icon>
+                            <Image Source="/img/pin.png" Height="16" Name="condensorTemperaturePin">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding CondensorMenuTemperatureClicked}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </MenuItem.Icon>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="condensorMenuTemperatureTxt"/>
+                            <Image Source="/img/save.png" Height="20">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding CondensorChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </StackPanel>
+                    </MenuItem>
+                </Menu>
+            </Popup>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Canvas.Left="470" Canvas.Top="492">
+            <StackPanel Canvas.Left="624" Orientation="Vertical" Canvas.Top="241">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Name="condensorMenuitemName_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding CondensorMenuLabelImgName_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="condensorMenuitemName_prop" Content="Name : Condensor"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="condensorMenuPower_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding CondensorMenuLabelImgPower_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="condensorMenuPower_prop"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="condensorMenuTemperature_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding CondensorMenuLabelImgTemperature_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="condensorMenuTemperature_prop"></Label>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="condensorMenuPressure_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding CondensorMenuLabelImgPressure_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="condensorMenuPressure_prop"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/img/pinned.png" Height="16" Visibility="Hidden" Name="condensorMenuSpeed_prop_img">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding CondensorMenuLabelImgSpeed_clicked}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <Label Name="condensorMenuSpeed_prop"></Label>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+            </StackPanel>
+        </StackPanel>
+
+    </Canvas>
+</Window>
